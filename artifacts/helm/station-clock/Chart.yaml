@@ -17,9 +17,9 @@ version: 0.0.1
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: "1.0.0"
+appVersion: "1.0.1"
 
 description: Example extension to perform demo's.
 
 # A URL to an SVG or PNG image to be used as an icon
-icon: http://clipart-library.com/images/pc5rjaoc9.jpg
+icon: https://raw.githubusercontent.com/thwyss/station-clock/main/clock.png
