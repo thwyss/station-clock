@@ -1,44 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>SAP Field Service Management - Example extension</title>
-    
-      <!--[if IE]>
+<head>
+  <meta charset="UTF-8">
+  <title>SAP Field Service Management - Extension Example</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/4.1.0/system.min.js"
+    integrity="sha256-i+j3ZmMaI9nPuzasKbNrT3evNnUewPBf5p9UEJdr2zA=" crossorigin="anonymous"></script>
+  <!--[if IE]>
         <script type="text/javascript" src="excanvas.js"></script>
       <![endif]-->
+  <script type="text/javascript" src="station-clock.js"></script>
+  <script type="text/javascript">
+    var clock = new StationClock("clock");
+    clock.body = StationClock.RoundBody;
+    clock.dial = StationClock.SwissStrokeDial;
+    clock.hourHand = StationClock.SwissHourHand;
+    clock.minuteHand = StationClock.SwissMinuteHand;
+    clock.secondHand = StationClock.SwissSecondHand;
+    clock.boss = StationClock.NoBoss;
+    clock.minuteHandBehavoir = StationClock.BouncingMinuteHand;
+    clock.secondHandBehavoir = StationClock.OverhastySecondHand;
 
-      <script type="text/javascript" src="station-clock.js"></script>
-      <script type="text/javascript">
+    function animate() {
+      clock.draw();
+      window.setTimeout("animate()", 50);
+    }
 
-      var clock = new StationClock("clock");
-      clock.body = StationClock.RoundBody;
-      clock.dial = StationClock.SwissStrokeDial;
-      clock.hourHand = StationClock.SwissHourHand;
-      clock.minuteHand = StationClock.SwissMinuteHand;
-      clock.secondHand = StationClock.SwissSecondHand;
-      clock.boss = StationClock.NoBoss;
-      clock.minuteHandBehavoir = StationClock.BouncingMinuteHand;
-      clock.secondHandBehavoir = StationClock.OverhastySecondHand;
-
-      animate();
-
-      function animate() {
-        clock.draw();
-        window.setTimeout("animate()", 50);
+    async function main() {  
+      // get latest sdk
+      const { ShellSdk, SHELL_EVENTS } = await System.import('https://unpkg.com/fsm-shell').then(m => m.default);
+      console.log('using ShellSdk version', ShellSdk.VERSION);
+      if (!ShellSdk.isInsideShell()) {
+        throw new Error('unable to reach shell eventAPI');
       }
-
-    </script>
-	
-  </head>
-  
-  <body>
-    <div style="text-align: center; padding-top: 50px">
-      <canvas id="clock" width="400" height="400">
-        Fehlermeldung       
-      </canvas>
-    </div>
-  </body>
-  
+      const shellSdk = ShellSdk.init(parent, '*');
+      // get context
+      shellSdk.emit(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, { clientIdentifier: 'example-plugin' });
+      shellSdk.on(SHELL_EVENTS.Version1.REQUIRE_CONTEXT, event => {
+        const {
+          account,
+          accountId,
+          company,
+          companyId,
+          user,
+          userId,
+          selectedLocale
+        } = JSON.parse(event);
+        animate();
+      });
+    }
+    main().catch(e => (console.error(e)));
+  </script>
+</head>
+<body>
+  <div style="text-align: center; padding-top: 50px">
+    <canvas id="clock" width="400" height="400">
+      Looks like we have an issue at the moment.
+    </canvas>
+  </div>
+</body>
 </html>

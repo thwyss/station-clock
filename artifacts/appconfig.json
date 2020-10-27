@@ -4,7 +4,7 @@
   "description": "Example extension to perform demo's.",
   "version": "1.0.0",
   "icon": "https://raw.githubusercontent.com/thwyss/station-clock/main/clock.png",
-  "useShellSDK": false,
+  "useShellSDK": true,
   "dockerRegistry": "docker.io/twyss81",
   "helmChartVersion": "0.0.1",
   "parameters": [],
