@@ -2,7 +2,7 @@
   "name": "station-clock",
   "provider": "SAP SE",
   "description": "Example extension to perform demo's.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "icon": "https://raw.githubusercontent.com/thwyss/station-clock/main/clock.png",
   "useShellSDK": true,
   "dockerRegistry": "docker.io/twyss81",
