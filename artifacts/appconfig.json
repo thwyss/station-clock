@@ -1,0 +1,12 @@
+{
+  "name": "station-clock",
+  "provider": "SAP SE",
+  "description": "Example extension to perform demo's.",
+  "version": "1.0.0",
+  "icon": "http://clipart-library.com/images/pc5rjaoc9.jpg",
+  "useShellSDK": false,
+  "dockerRegistry": "docker.io/twyss81",
+  "helmChartVersion": "0.0.1",
+  "parameters": [],
+  "outletPositions": []
+}
